@@ -345,8 +345,7 @@ module.exports = function(/* constructor, ...constructorArgs */) {
     var obj;
 
     if (constructor.prototype) {
-      obj = Object.create(constructor.prototype);
-      obj.constructor.apply(obj, constructorArgs);
+      obj = new (Function.prototype.bind.apply(constructor, [null].concat(constructorArgs)));
     } else if (constructor.init) {
       obj = constructor;
     }
